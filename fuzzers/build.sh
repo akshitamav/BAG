@@ -9,7 +9,7 @@ BUILDTYPE=Debug
 LIBRARY=-lbaglibd
 HDF_END=_debug
 XML_END=
-EXTRA_CXX_FLAGS=-g -O0
+EXTRA_CXX_FLAGS="-g" "-O0"
 
 cmake -G Ninja -DCMAKE_BUILD_TYPE=$BUILDTYPE -B build -S . \
   -DCMAKE_INSTALL_PREFIX:PATH=/opt \
