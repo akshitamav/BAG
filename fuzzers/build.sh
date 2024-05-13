@@ -48,10 +48,23 @@ $CXX $CXXFLAGS $EXTRA_CXX_FLAGS \
   -L/opt/lib -lhdf5$HDF_END \
   -L/opt/lib -lxml2$XML_END
 
-$CXX $CXXFLAGS $EXTRA_CXX_FLAGS -std=c++14 -gdwarf-4  \
+$CXX $EXTRA_CXX_FLAGS -std=c++14 -gdwarf-4  \
+  -O1 \
+  -fno-omit-frame-pointer \
+  -gline-tables-only \
+  -Wno-error=enum-constexpr-conversion \
+  -Wno-error=incompatible-function-pointer-types \
+  -Wno-error=int-conversion \
+  -Wno-error=deprecated-declarations \
+  -Wno-error=implicit-function-declaration \
+  -Wno-error=implicit-int \
+  -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION \
+  -fsanitize=memory \
+  -fsanitize-memory-track-origins \
+  -fsanitize=fuzzer-no-link \
+  -stdlib=libc++
   -I$SRC_DIR/api \
   fuzzers/driver.cpp -o $OUT/driver \
-  $LIB_FUZZING_ENGINE \
   -L/opt/lib/static $LIBRARY \
   -L/opt/lib -lhdf5_cpp$HDF_END \
   -L/opt/lib -lhdf5$HDF_END \
