@@ -25,7 +25,7 @@ void printLayerDescriptor(
               std::get<1>(minMax) << ")\n";
 }
 
-extern "C" int LLVMFuzzerTestOneInputByFile(const char* filename) {
+extern "C" int LLVMFuzzerTestOneInputByFile(char* filename) {
 
 
     auto pDataset = Dataset::open(filename, BAG_OPEN_READONLY);
