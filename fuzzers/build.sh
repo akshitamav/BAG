@@ -48,7 +48,7 @@ $CXX $CXXFLAGS $EXTRA_CXX_FLAGS \
   -L/opt/lib -lhdf5$HDF_END \
   -L/opt/lib -lxml2$XML_END
 
-$CXX $CXXFLAGS $EXTRA_CXX_FLAGS -std=c++14  \
+$CXX $CXXFLAGS $EXTRA_CXX_FLAGS -std=c++14 -gdwarf-4  \
   -I$SRC_DIR/api \
   fuzzers/driver.cpp -o $OUT/driver \
   $LIB_FUZZING_ENGINE \
