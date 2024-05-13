@@ -48,5 +48,15 @@ $CXX $CXXFLAGS $EXTRA_CXX_FLAGS \
   -L/opt/lib -lhdf5$HDF_END \
   -L/opt/lib -lxml2$XML_END
 
+$CXX $CXXFLAGS $EXTRA_CXX_FLAGS \
+  -I$SRC_DIR/api \
+  fuzzers/driver.cpp -o $OUT/driver \
+  $LIB_FUZZING_ENGINE \
+  -L/opt/lib/static $LIBRARY \
+  -L/opt/lib -lhdf5_cpp$HDF_END \
+  -L/opt/lib -lhdf5$HDF_END \
+  -L/opt/lib -lxml2$XML_END
+
+
 echo "Building seed corpus..."
 zip -j $OUT/bag_extended_fuzzer_seed_corpus.zip $SRC_DIR/examples/sample-data/*.bag
