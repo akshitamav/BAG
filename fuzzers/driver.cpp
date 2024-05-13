@@ -35,9 +35,9 @@ int main(int argc, char** argv)//argv, which is an array of pointers to strings 
 
     std::cout << "got " << len << " bytes" << std::endl;
 
-    char* filename_cstr = new char[filename.length() + 1];
+    //char* filename_cstr = new char[filename.length() + 1];
 
-    strcpy(filename_cstr, filename.c_str());
+    //strcpy(filename_cstr, filename.c_str());
 
-    LLVMFuzzerTestOneInputByFile(filename_cstr);
+    LLVMFuzzerTestOneInputByFile(filename.c_str());
 }
