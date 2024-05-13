@@ -20,6 +20,7 @@ cmake --build build --config $BUILDTYPE --target install
 echo $(pkg-config baglib)
 echo $(ldconfig -p | grep "bag")
 ls /opt/lib/static
+ls /opt/lib
 
 echo "Building bag_read_fuzzer..."
 $CXX $CXXFLAGS \
