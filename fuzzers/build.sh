@@ -12,7 +12,10 @@ cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -B build -S . \
   -DBAG_BUILD_TESTS:BOOL=OFF -DBAG_CODE_COVERAGE:BOOL=OFF \
   -DBAG_BUILD_PYTHON:BOOL=OFF -DBAG_BUILD_EXAMPLES:BOOL=OFF
 
-cmake --build build --config Release --target install
+cmake --build build --config Debug --target install
+
+echo $(pkgconfig baglib)
+echo $(ldconfig -p | grep "bag")
 
 echo "Building bag_read_fuzzer..."
 $CXX $CXXFLAGS \
