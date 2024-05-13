@@ -9,6 +9,7 @@ BUILDTYPE=Debug
 LIBRARY=-lbaglibd
 HDF_END=_debug
 XML_END=
+EXTRA_CXX_FLAGS=-g -O0
 
 cmake -G Ninja -DCMAKE_BUILD_TYPE=$BUILDTYPE -B build -S . \
   -DCMAKE_INSTALL_PREFIX:PATH=/opt \
@@ -24,6 +25,9 @@ echo $(ldconfig -p | grep "bag")
 ls /opt/lib/static
 ls /opt/lib
 
+echo "CXXFLAGS:"
+echo $CXXFLAGS
+
 echo "Building bag_read_fuzzer..."
 $CXX $CXXFLAGS \
   -I$SRC_DIR/api \
@@ -32,7 +36,8 @@ $CXX $CXXFLAGS \
   -L/opt/lib/static $LIBRARY \
   -L/opt/lib -lhdf5_cpp$HDF_END \
   -L/opt/lib -lhdf5$HDF_END \
-  -L/opt/lib -lxml2$XML_END
+  -L/opt/lib -lxml2$XML_END \
+  $EXTRA_CXX_FLAGS
 
 echo "Building bag_extended_fuzzer..."
 $CXX $CXXFLAGS \
@@ -42,7 +47,8 @@ $CXX $CXXFLAGS \
   -L/opt/lib/static $LIBRARY \
   -L/opt/lib -lhdf5_cpp$HDF_END \
   -L/opt/lib -lhdf5$HDF_END \
-  -L/opt/lib -lxml2$XML_END
+  -L/opt/lib -lxml2$XML_END \
+  $EXTRA_CXX_FLAGS
 
 echo "Building seed corpus..."
 zip -j $OUT/bag_extended_fuzzer_seed_corpus.zip $SRC_DIR/examples/sample-data/*.bag
