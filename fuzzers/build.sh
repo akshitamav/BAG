@@ -48,8 +48,9 @@ $CXX $CXXFLAGS $EXTRA_CXX_FLAGS \
   -L/opt/lib -lhdf5$HDF_END \
   -L/opt/lib -lxml2$XML_END
 
-$CXX $EXTRA_CXX_FLAGS -std=c++14 -gdwarf-4  \
-  -O1 \
+$CXX -std=c++14 -gdwarf-4  \
+  -g \
+  -O0 \
   -fno-omit-frame-pointer \
   -gline-tables-only \
   -Wno-error=enum-constexpr-conversion \
@@ -58,17 +59,16 @@ $CXX $EXTRA_CXX_FLAGS -std=c++14 -gdwarf-4  \
   -Wno-error=deprecated-declarations \
   -Wno-error=implicit-function-declaration \
   -Wno-error=implicit-int \
-  -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION \
   -fsanitize=memory \
   -fsanitize-memory-track-origins \
   -fsanitize=fuzzer-no-link \
   -stdlib=libc++
-  -I$SRC_DIR/api \
   fuzzers/driver.cpp -o $OUT/driver \
   -L/opt/lib/static $LIBRARY \
   -L/opt/lib -lhdf5_cpp$HDF_END \
   -L/opt/lib -lhdf5$HDF_END \
   -L/opt/lib -lxml2$XML_END
+#  -I$SRC_DIR/api \
 
 
 echo "Building seed corpus..."
