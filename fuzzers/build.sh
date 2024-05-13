@@ -62,13 +62,13 @@ $CXX -std=c++14 -gdwarf-4  \
   -fsanitize=memory \
   -fsanitize-memory-track-origins \
   -fsanitize=fuzzer-no-link \
-  -stdlib=libc++
+  -stdlib=libc++ \
+  -I$SRC_DIR/api \
   fuzzers/driver.cpp -o $OUT/driver \
   -L/opt/lib/static $LIBRARY \
   -L/opt/lib -lhdf5_cpp$HDF_END \
   -L/opt/lib -lhdf5$HDF_END \
   -L/opt/lib -lxml2$XML_END
-#  -I$SRC_DIR/api \
 
 
 echo "Building seed corpus..."
