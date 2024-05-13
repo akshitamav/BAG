@@ -114,5 +114,5 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *buf, size_t len) {
     fwrite(buf, len, 1, fp);
     fclose(fp);
 
-    LLVMFuzzerTestOneInputByFile(filename);
+    return LLVMFuzzerTestOneInputByFile(filename);
 }
