@@ -7,6 +7,8 @@ cd $SRC_DIR
 
 BUILDTYPE=Debug
 LIBRARY=-lbaglibd
+HDF_END=_debug
+XML_END=
 
 cmake -G Ninja -DCMAKE_BUILD_TYPE=$BUILDTYPE -B build -S . \
   -DCMAKE_INSTALL_PREFIX:PATH=/opt \
@@ -28,9 +30,9 @@ $CXX $CXXFLAGS \
   fuzzers/bag_read_fuzzer.cpp -o $OUT/bag_read_fuzzer \
   $LIB_FUZZING_ENGINE \
   -L/opt/lib/static $LIBRARY \
-  -L/opt/lib -lhdf5_cpp \
-  -L/opt/lib -lhdf5 \
-  -L/opt/lib -lxml2
+  -L/opt/lib -lhdf5_cpp$HDF_END \
+  -L/opt/lib -lhdf5$HDF_END \
+  -L/opt/lib -lxml2$XML_END
 
 echo "Building bag_extended_fuzzer..."
 $CXX $CXXFLAGS \
@@ -38,9 +40,9 @@ $CXX $CXXFLAGS \
   fuzzers/bag_extended_fuzzer.cpp -o $OUT/bag_extended_fuzzer \
   $LIB_FUZZING_ENGINE \
   -L/opt/lib/static $LIBRARY \
-  -L/opt/lib -lhdf5_cpp \
-  -L/opt/lib -lhdf5 \
-  -L/opt/lib -lxml2
+  -L/opt/lib -lhdf5_cpp$HDF_END \
+  -L/opt/lib -lhdf5$HDF_END \
+  -L/opt/lib -lxml2$XML_END
 
 echo "Building seed corpus..."
 zip -j $OUT/bag_extended_fuzzer_seed_corpus.zip $SRC_DIR/examples/sample-data/*.bag
