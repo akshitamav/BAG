@@ -25,19 +25,8 @@ void printLayerDescriptor(
               std::get<1>(minMax) << ")\n";
 }
 
+extern "C" int LLVMFuzzerTestOneInputByFile(const char* filename) {
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t *buf, size_t len) {
-
-    char filename[256];
-    snprintf(filename, 255, "/tmp/libfuzzer.%d", getpid());
-
-    // Save input file to temporary file so that we can read it.
-    FILE *fp = fopen(filename, "wb");
-    if (!fp) {
-        return 0;
-    }
-    fwrite(buf, len, 1, fp);
-    fclose(fp);
 
     auto pDataset = Dataset::open(filename, BAG_OPEN_READONLY);
     if (pDataset == NULL) {
@@ -111,4 +100,19 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *buf, size_t len) {
     pDataset->close();
 
     return EXIT_SUCCESS;
+}
+
+extern "C" int LLVMFuzzerTestOneInput(const uint8_t *buf, size_t len) {
+    char filename[256];
+    snprintf(filename, 255, "/tmp/libfuzzer.%d", getpid());
+
+    // Save input file to temporary file so that we can read it.
+    FILE *fp = fopen(filename, "wb");
+    if (!fp) {
+        return 0;
+    }
+    fwrite(buf, len, 1, fp);
+    fclose(fp);
+
+    LLVMFuzzerTestOneInputByFile(filename);
 }

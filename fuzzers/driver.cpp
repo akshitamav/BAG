@@ -34,5 +34,5 @@ int main(int argc, char** argv)//argv, which is an array of pointers to strings 
 
     std::cout << "got " << len << " bytes" << std::endl;
 
-    LLVMFuzzerTestOneInput(array, len, argv[1]);
+    LLVMFuzzerTestOneInputByFile(filename);
 }
