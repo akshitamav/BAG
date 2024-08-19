@@ -48,8 +48,7 @@ $CXX $CXXFLAGS $EXTRA_CXX_FLAGS \
   -L/opt/lib -lhdf5$HDF_END \
   -L/opt/lib -lxml2$XML_END
 
-$CXX -std=c++14 -gdwarf-4  \
-  -g \
+$CXX -std=c++17 -gdwarf-4  \
   -O0 \
   -fno-omit-frame-pointer \
   -gline-tables-only \
